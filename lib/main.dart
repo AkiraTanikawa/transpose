@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'chord.dart';
+
 void main() {
   runApp(AkiraApp());
 }
@@ -60,7 +62,12 @@ class _HomePageState extends State<HomePage> {
 
   void transpose() {
     setState(() {
-      _outputController.text = _inputController.text;
+      //_outputController.text = _inputController.text;
+      var chords = Chord.parse(_inputController.text);
+      for (var chordItem in chords) {
+        chordItem.transpose(difference);
+        
+      }
     });
   }
 

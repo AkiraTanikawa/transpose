@@ -1,5 +1,5 @@
 class Chord {
-  List<String> scale = [
+  static List<String> scale = [
     'C',
     'C#',
     'D',
@@ -15,16 +15,26 @@ class Chord {
   ];
 
   String value;
+  int index;
 
-  Chord(String input){
+  Chord(String input , int i){
     value = input;
+    index = i;
   }
 
-  List<Chord> parse(String text){
-    
+  static List<Chord> parse(String text){
+    var parts = text.split(" ");
+    List<Chord> output =List<Chord>();
+    for (var partItem in parts) {
+      var chord = Chord(partItem,scale.indexOf(partItem));
+      output.add(chord);
+    } 
+
+    return output;
   }
 
-  Chord transepose(int difference){
-
+  Chord transpose(int difference){
+    var outputChordName = scale[(index+difference)%12];
+    return Chord(outputChordName,(index+difference)%12);
   }
 }
